@@ -3,6 +3,7 @@ package net.delphin.jdelphin.mrs;
 
 import java.util.Set;
 
+import net.delphin.jdelphin.mrs.components.Variable;
 import net.delphin.jdelphin.mrs.components.ElementaryPredication;
 import net.delphin.jdelphin.mrs.components.HandleConstraint;
 import net.delphin.jdelphin.mrs.components.IndividualConstraint;
@@ -22,34 +23,34 @@ public interface XMRS {
 
 	/*
 	 * top: the TOP (or maybe LTOP) variable
-	 *
+	 * 
 	 * index: the INDEX variable
-	 *
+	 * 
 	 * xarg: the XARG variable
-	 *
+	 * 
 	 * eps: an iterable of EPs (see above)
-	 *
+	 * 
 	 * hcons: an iterable of HCONS (see above)
-	 *
+	 * 
 	 * icons: an iterable of ICONS (see above)
-	 *
+	 * 
 	 * vars: a mapping of variable to a list of property-value pairs
-	 *
+	 * 
 	 * lnk: the Lnk object associating the Xmrs to the surface form
-	 *
+	 * 
 	 * surface: the surface string
 	 */
 
-	public abstract Argument getTop();
+	public abstract Variable getTop();
 
 
-	public abstract Argument getLTop();
+	public abstract Variable getLTop();
 
 
-	public abstract Argument getIndex();
+	public abstract Variable getIndex();
 
 
-	public abstract Argument getXARG();
+	public abstract Variable getXARG();
 
 
 	public abstract Set<ElementaryPredication> getEPs();

@@ -15,7 +15,7 @@ import net.delphin.jdelphin.mrs.XMRS;
  */
 public interface HandleConstraint {
 
-	public static enum Relation {
+	public static enum HandleRelation {
 		QEQ,
 		LHEQ,
 		OUTSCOPES;
@@ -27,12 +27,12 @@ public interface HandleConstraint {
 	}
 
 
-	public abstract Argument getHi();
+	public abstract Variable getLo();
 
 
-	public abstract Argument getLo();
+	public abstract Handle getHi();
 
 
-	public abstract Relation getRelation();
+	public abstract HandleRelation getRelation();
 
 }
