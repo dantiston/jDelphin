@@ -10,6 +10,8 @@ package net.delphin.jdelphin.mrs.components;
  * @since Feb 15, 2016
  * @version 0.1
  */
-public interface Constant extends Variable {
+public interface Constant {
+
+	public abstract String get();
 
 }

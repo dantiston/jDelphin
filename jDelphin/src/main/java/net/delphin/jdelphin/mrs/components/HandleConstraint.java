@@ -13,7 +13,7 @@ import net.delphin.jdelphin.mrs.XMRS;
  * @since Feb 14, 2016
  * @version 0.1
  */
-public interface HandleConstraint {
+public interface HandleConstraint extends Comparable<HandleConstraint> {
 
 	public static enum HandleRelation {
 		QEQ,

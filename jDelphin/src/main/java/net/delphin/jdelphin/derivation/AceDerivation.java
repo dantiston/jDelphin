@@ -13,14 +13,8 @@ import java.util.List;
  * @since Feb 14, 2016
  * @version 0.1
  */
-public interface Derivation {
+public interface AceDerivation {
 
-	public abstract String getWord();
-
-
-	public abstract List<? extends Derivation> getChildren();
-
-
-	public abstract Derivation getParent();
+	public abstract List<? extends AceDerivation> getChildren();
 
 }

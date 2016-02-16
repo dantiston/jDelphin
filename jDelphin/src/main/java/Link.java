@@ -1,4 +1,5 @@
-package net.delphin.jdelphin.mrs.components.link;
+
+
 
 import net.delphin.jdelphin.mrs.components.ElementaryPredication;
 
@@ -12,6 +13,11 @@ import net.delphin.jdelphin.mrs.components.ElementaryPredication;
  * @since Feb 14, 2016
  * @version 0.1
  */
-public interface Link {
+public interface Link extends Comparable<Link> {
+
+	/**
+	 * @return the {@link String} representation of this {@link Link}
+	 */
+	public abstract String getRepresentation();
 
 }
