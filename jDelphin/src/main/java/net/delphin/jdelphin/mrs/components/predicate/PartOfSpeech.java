@@ -496,7 +496,7 @@ public abstract class PartOfSpeech {
 			if (string.isEmpty()) {
 				throw new IllegalArgumentException();
 			}
-			if (string.length() == 1) {
+			if (string.length() == 1 && Character.isAlphabetic(string.codePointAt(0))) {
 				this.abbreviation = string.charAt(0);
 				this.name = DEFAULT_NAME;
 			} else {
@@ -506,11 +506,31 @@ public abstract class PartOfSpeech {
 		}
 
 
+		private Unknown(String name, Character abbreviation) {
+			if (name == null || abbreviation == null) {
+				throw new NullPointerException();
+			}
+			if (name.isEmpty()) {
+				throw new IllegalArgumentException();
+			}
+			this.name = name;
+			this.abbreviation = abbreviation;
+		}
+
+
 		private static final Unknown with(String string) {
 			if (string == null) {
 				throw new NullPointerException("Unknown#with() passed null parameter");
 			}
 			return new Unknown(string);
+		}
+
+
+		private static final Unknown with(String name, Character abbreviation) {
+			if (name == null || abbreviation == null) {
+				throw new NullPointerException("Unknown#with() passed null parameter");
+			}
+			return new Unknown(name, abbreviation);
 		}
 
 
