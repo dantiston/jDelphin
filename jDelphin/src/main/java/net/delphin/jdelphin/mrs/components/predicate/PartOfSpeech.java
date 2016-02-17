@@ -472,7 +472,7 @@ public abstract class PartOfSpeech {
 	 * @since Feb 15, 2016
 	 * @version 0.1
 	 */
-	private static final class Unknown extends PartOfSpeech {
+	public static final class Unknown extends PartOfSpeech {
 
 		private static final Unknown INSTANCE = new Unknown();
 		private static final String DEFAULT_NAME = "Unknown";
@@ -526,7 +526,7 @@ public abstract class PartOfSpeech {
 		}
 
 
-		private static final Unknown with(String name, Character abbreviation) {
+		public static final Unknown with(String name, Character abbreviation) {
 			if (name == null || abbreviation == null) {
 				throw new NullPointerException("Unknown#with() passed null parameter");
 			}
