@@ -44,10 +44,8 @@ public abstract class PartOfSpeech {
 		result.put(Conjunction.get().getAbbreviation().toString(), Conjunction.get());
 		result.put(DiscourseParticle.get().getName(), DiscourseParticle.get());
 		result.put(DiscourseParticle.get().getAbbreviation().toString(), DiscourseParticle.get());
-		result.put(GrammarPartOfSpeech.get().getName(), GrammarPartOfSpeech.get());
-		result.put(GrammarPartOfSpeech.get().getAbbreviation().toString(), GrammarPartOfSpeech.get());
-		result.put(Unknown.get().getName(), Unknown.get());
-		result.put(Unknown.get().getAbbreviation().toString(), Unknown.get());
+		result.put(DiscourseItem.get().getName(), DiscourseItem.get());
+		result.put(DiscourseItem.get().getAbbreviation().toString(), DiscourseItem.get());
 		return result;
 	}
 
@@ -65,7 +63,11 @@ public abstract class PartOfSpeech {
 		if (key.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
-		return Optional.ofNullable(MAPPINGS.get(key));
+		Optional<PartOfSpeech> result = Optional.ofNullable(MAPPINGS.get(key));
+		if (!result.isPresent()) {
+			result = Optional.of(Unknown.with(key));
+		}
+		return result;
 	}
 
 
@@ -427,26 +429,26 @@ public abstract class PartOfSpeech {
 	}
 
 	/**
-	 * IDK<br>
+	 * DiscourseItem<br>
 	 * <br>
-	 * {@link PartOfSpeech} for certain {@link GrammarPredicate}s, e.g.
-	 * "parg_d_rel"
+	 * {@link PartOfSpeech} for certain discourse relations, e.g. the passive
+	 * argument, "parg_d_rel"
 	 *
 	 * @author trimblet
 	 * @since Feb 15, 2016
 	 * @version 0.1
 	 */
-	private static final class GrammarPartOfSpeech extends PartOfSpeech {
+	private static final class DiscourseItem extends PartOfSpeech {
 
-		private static final GrammarPartOfSpeech INSTANCE = new GrammarPartOfSpeech();
+		private static final DiscourseItem INSTANCE = new DiscourseItem();
 
 
-		private GrammarPartOfSpeech() {} // No instantiation
+		private DiscourseItem() {} // No instantiation
 
 
 		@Override
 		public final String getName() {
-			return "Grammar Part Of Speech";
+			return "Discourse Item";
 		}
 
 
@@ -456,7 +458,7 @@ public abstract class PartOfSpeech {
 		}
 
 
-		public static final GrammarPartOfSpeech get() {
+		public static final DiscourseItem get() {
 			return INSTANCE;
 		}
 	}
@@ -473,20 +475,54 @@ public abstract class PartOfSpeech {
 	private static final class Unknown extends PartOfSpeech {
 
 		private static final Unknown INSTANCE = new Unknown();
+		private static final String DEFAULT_NAME = "Unknown";
+		private static final Character DEFAULT_ABBREVIATION = 'u';
+
+		private final Character abbreviation;
+		private final String name;
 
 
-		private Unknown() {} // No instantiation
+		private Unknown() {
+			this.abbreviation = DEFAULT_ABBREVIATION;
+			this.name = DEFAULT_NAME;
+		}
+
+
+		private Unknown(String string) {
+			if (string == null) {
+				throw new NullPointerException("Unknown#() passed null parameter");
+			}
+			string = string.trim();
+			if (string.isEmpty()) {
+				throw new IllegalArgumentException();
+			}
+			if (string.length() == 1) {
+				this.abbreviation = string.charAt(0);
+				this.name = DEFAULT_NAME;
+			} else {
+				this.abbreviation = DEFAULT_ABBREVIATION;
+				this.name = string;
+			}
+		}
+
+
+		private static final Unknown with(String string) {
+			if (string == null) {
+				throw new NullPointerException("Unknown#with() passed null parameter");
+			}
+			return new Unknown(string);
+		}
 
 
 		@Override
 		public final String getName() {
-			return "Unknown";
+			return this.name;
 		}
 
 
 		@Override
 		public final Character getAbbreviation() {
-			return 'u';
+			return this.abbreviation;
 		}
 
 
