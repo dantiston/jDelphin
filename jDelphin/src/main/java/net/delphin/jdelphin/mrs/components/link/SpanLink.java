@@ -18,6 +18,13 @@ public abstract class SpanLink implements Link {
 	private static final String TEMPLATE = "<%s%s%s>";
 
 
+	/**
+	 * Given a
+	 *
+	 * @param link
+	 * @param string
+	 * @return
+	 */
 	public static final String getSubstringFrom(SpanLink link, String string) {
 		if (link == null || string == null) {
 			throw new NullPointerException("AbstractSpanLink#getSubstringFrom() passed null parameter");

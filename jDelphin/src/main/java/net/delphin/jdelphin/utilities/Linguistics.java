@@ -89,6 +89,12 @@ public final class Linguistics {
 			return Optional.empty();
 		}
 
+
+		@Override
+		public boolean isConnected() {
+			return true;
+		}
+
 	}
 
 }

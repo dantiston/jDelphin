@@ -4,7 +4,7 @@ package net.delphin.jdelphin.mrs.impl;
 import java.util.Optional;
 import java.util.Set;
 
-import net.delphin.jdelphin.mrs.MinimalRecusionSemantics;
+import net.delphin.jdelphin.mrs.MinimalRecursionSemantics;
 import net.delphin.jdelphin.mrs.components.ElementaryPredication;
 import net.delphin.jdelphin.mrs.components.Handle;
 import net.delphin.jdelphin.mrs.components.HandleConstraint;
@@ -23,7 +23,7 @@ import net.delphin.jdelphin.mrs.components.Variable;
  * @see <a
  *      href="http://moin.delph-in.net/MrsRfc">http://moin.delph-in.net/MrsRfc</a>
  */
-public class BasicMRS extends BasicXMRS implements MinimalRecusionSemantics {
+public class BasicMRS extends BasicXMRS implements MinimalRecursionSemantics {
 
 	public BasicMRS(Handle top, Variable index, Variable xarg, Set<ElementaryPredication> relations, Set<HandleConstraint> handleConstraints, Set<IndividualConstraint> individualConstraints) {
 		super(top, index, xarg, relations, handleConstraints, individualConstraints);

@@ -48,4 +48,7 @@ public interface XMRS {
 
 	public abstract Optional<String> getSurfaceRepresentation();
 
+
+	public abstract boolean isConnected();
+
 }

@@ -102,4 +102,10 @@ public abstract class BasicXMRS implements XMRS {
 		return this.surfaceString;
 	}
 
+
+	@Override
+	public boolean isConnected() {
+		throw new UnsupportedOperationException("Not yet implemented!");
+	}
+
 }
