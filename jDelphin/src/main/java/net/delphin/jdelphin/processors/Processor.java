@@ -28,4 +28,10 @@ public interface Processor {
 
 
 	public abstract List<String> translate(MinimalRecursionSemantics mrs, Processor otherGrammar);
+
+
+	public abstract String getLoadedGrammarPath();
+
+
+	public abstract void shutDown();
 }

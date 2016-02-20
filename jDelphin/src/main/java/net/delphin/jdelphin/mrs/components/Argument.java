@@ -21,8 +21,17 @@ public interface Argument extends Comparable<Argument> {
 
 	public abstract Position getPosition();
 
+	/**
+	 * Position<br>
+	 * <br>
+	 * An {@link Enum} of the standard {@link Position} objects in DELPH-IN
+	 * grammars and the Grammar Matrix.
+	 *
+	 * @author trimblet
+	 * @since Feb 20, 2016
+	 * @version 0.1
+	 */
 	public enum Position {
-
 		ARG0,
 		ARG1,
 		ARG2,
@@ -33,7 +42,6 @@ public interface Argument extends Comparable<Argument> {
 		RSTR,
 		BODY,
 		CARG;
-
 	}
 
 }

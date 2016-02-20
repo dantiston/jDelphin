@@ -15,12 +15,12 @@ import java.util.List;
  */
 public interface Derivation {
 
-	public abstract String getWord();
+	public abstract Derivation getParent();
 
 
 	public abstract List<? extends Derivation> getChildren();
 
 
-	public abstract Derivation getParent();
+	public abstract NodeLabel getLabel();
 
 }
