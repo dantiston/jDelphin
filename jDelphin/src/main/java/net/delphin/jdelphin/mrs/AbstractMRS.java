@@ -1,6 +1,7 @@
 package net.delphin.jdelphin.mrs;
 
 
+import java.util.Optional;
 import java.util.Set;
 
 import net.delphin.jdelphin.mrs.components.ElementaryPredication;
@@ -23,18 +24,30 @@ public abstract class AbstractMRS implements MinimalRecursionSemantics {
 
 	private final Handle top;
 	private final Variable index;
+	private final Variable xarg;
 	private final Set<ElementaryPredication> relations;
 	private final Set<HandleConstraint> hcons;
 	private final Set<IndividualConstraint> icons;
-	private final String surface;
+	private final Optional<String> surface;
 
 
-	public AbstractMRS(Handle top, Variable index, Set<ElementaryPredication> relations, Set<HandleConstraint> hcons, Set<IndividualConstraint> icons, String surface) {
-		if (top == null || index == null || relations == null || hcons == null || icons == null || surface == null) {
+	public AbstractMRS(Handle top, Variable index, Variable xarg, Set<ElementaryPredication> relations, Set<HandleConstraint> hcons, Set<IndividualConstraint> icons) {
+		this(top, index, xarg, relations, hcons, icons, Optional.empty());
+	}
+
+
+	public AbstractMRS(Handle top, Variable index, Variable xarg, Set<ElementaryPredication> relations, Set<HandleConstraint> hcons, Set<IndividualConstraint> icons, String surface) {
+		this(top, index, xarg, relations, hcons, icons, Optional.of(surface));
+	}
+
+
+	public AbstractMRS(Handle top, Variable index, Variable xarg, Set<ElementaryPredication> relations, Set<HandleConstraint> hcons, Set<IndividualConstraint> icons, Optional<String> surface) {
+		if (top == null || index == null || xarg == null || relations == null || hcons == null || icons == null || surface == null) {
 			throw new NullPointerException("AbstractMRS#() passed null parameter");
 		}
 		this.top = top;
 		this.index = index;
+		this.xarg = xarg;
 		this.relations = relations;
 		this.hcons = hcons;
 		this.icons = icons;
@@ -43,15 +56,57 @@ public abstract class AbstractMRS implements MinimalRecursionSemantics {
 
 
 	@Override
-	public boolean isConnected() {
-		// TODO Auto-generated method stub
-		return false;
+	public Handle getTop() {
+		return this.top;
+	}
+
+
+	@Override
+	public Variable getIndex() {
+		return this.index;
+	}
+
+
+	@Override
+	public Variable getXARG() {
+		return this.xarg;
+	}
+
+
+	@Override
+	public Set<ElementaryPredication> getRelations() {
+		return this.relations;
+	}
+
+
+	@Override
+	public Set<HandleConstraint> getHCONS() {
+		return this.hcons;
+	}
+
+
+	@Override
+	public Set<IndividualConstraint> getICONS() {
+		return this.icons;
+	}
+
+
+	@Override
+	public Optional<String> getSurfaceRepresentation() {
+		return this.surface;
 	}
 
 
 	@Override
 	public final Handle getLTop() {
 		return this.getTop();
+	}
+
+
+	@Override
+	public boolean isConnected() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

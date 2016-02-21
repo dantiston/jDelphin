@@ -53,7 +53,8 @@ public class Ace extends AbstractLuiProcessor {
 
 	private final String grammarUrl;
 	private final String executable;
-	private final Process process;
+	// private final Process process;
+	private final ProcessBuilder processBuilder;
 
 
 	public Ace(String grammarUrl) throws IOException {
@@ -82,30 +83,35 @@ public class Ace extends AbstractLuiProcessor {
 		String[] commands = COMMANDS.clone();
 		commands[0] = executable;
 		commands[COMMANDS.length - 1] = grammarUrl;
-		System.out.println(String.join(" ", commands));
 		process.command(commands);
-		this.process = process.start();
+		this.processBuilder = process;
+
+		// this.process = process.start();
 	}
 
 
 	@Override
-	public List<String> doParse(String string) {
+	public List<String> doParse(String string) throws IOException, InterruptedException {
 		List<String> result = Collections.emptyList();
-		try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream()));
-				BufferedReader reader = new BufferedReader(new InputStreamReader(this.process.getInputStream()))) {
-
+		Process process = this.processBuilder.start();
+		try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()))) {
 			// Send the request
 			writer.write(string);
-
-			// Receive the results
-			result = new ArrayList<String>(10);
-			String line;
-			while ((line = reader.readLine()) != null) {
-				result.add(line);
+			writer.flush();
+			process.waitFor();
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+				// Receive the results
+				result = new ArrayList<String>(10);
+				String line;
+				while ((line = reader.readLine()) != null) {
+					System.out.println("Line: " + line);
+					result.add(line);
+				}
 			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
+		}
+		process.destroy();
+		if (process.isAlive()) {
+			process.destroyForcibly();
 		}
 		return result;
 	}
@@ -113,8 +119,7 @@ public class Ace extends AbstractLuiProcessor {
 
 	@Override
 	public List<String> requestMrs(List<? extends Derivation> derivations) {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.emptyList(); // TODO: THIS
 	}
 
 
@@ -140,12 +145,12 @@ public class Ace extends AbstractLuiProcessor {
 
 	@Override
 	public void shutDown() {
-		// this.process.getOutputStream()
-		if (this.process.isAlive()) {
-			this.process.destroy();
-		}
-		if (this.process.isAlive()) {
-			this.process.destroyForcibly();
-		}
+		// // this.process.getOutputStream()
+		// if (this.process.isAlive()) {
+		// this.process.destroy();
+		// }
+		// if (this.process.isAlive()) {
+		// this.process.destroyForcibly();
+		// }
 	}
 }

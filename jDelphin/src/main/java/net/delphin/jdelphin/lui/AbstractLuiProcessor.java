@@ -1,6 +1,7 @@
 package net.delphin.jdelphin.lui;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,12 +31,17 @@ public abstract class AbstractLuiProcessor extends AbstractProcessor implements 
 		}
 		List<Parse> result = Collections.emptyList();
 		if (!string.isEmpty()) {
-			List<? extends Derivation> derivations = LuiDerivation.fromStrings(this.doParse(this.makeParse(string)));
-			List<? extends MinimalRecursionSemantics> mrs = LuiMrs.fromStrings(this.requestMrs(derivations));
-			assert derivations.size() == mrs.size();
-			result = new ArrayList<Parse>(derivations.size());
-			for (int i = 0; i < derivations.size(); i++) {
-				result.add(new LuiParse(derivations.get(i), mrs.get(i)));
+			List<? extends Derivation> derivations;
+			try {
+				derivations = LuiDerivation.fromStrings(this.doParse(this.makeParse(string)));
+				List<? extends MinimalRecursionSemantics> mrs = LuiMrs.fromStrings(this.requestMrs(derivations));
+				assert derivations.size() == mrs.size();
+				result = new ArrayList<Parse>(derivations.size());
+				for (int i = 0; i < derivations.size(); i++) {
+					result.add(new LuiParse(derivations.get(i), mrs.get(i)));
+				}
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 		return result;

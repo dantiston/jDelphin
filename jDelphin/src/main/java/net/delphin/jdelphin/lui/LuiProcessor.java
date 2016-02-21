@@ -1,6 +1,7 @@
 package net.delphin.jdelphin.lui;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import net.delphin.jdelphin.derivation.Derivation;
@@ -33,7 +34,7 @@ public interface LuiProcessor extends Processor {
 	abstract String makeUnify(String left, String right);
 
 
-	abstract List<String> doParse(String string);
+	abstract List<String> doParse(String string) throws IOException, InterruptedException;
 
 
 	abstract List<String> requestMrs(List<? extends Derivation> derivations);

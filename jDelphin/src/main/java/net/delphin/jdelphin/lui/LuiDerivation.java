@@ -36,6 +36,7 @@ public final class LuiDerivation implements Derivation {
 					throw new NullPointerException("LuiDerivation#fromStrings() passed parameter with a null element");
 				}
 				if (!string.isEmpty()) {
+					System.out.println("Tree: " + string);
 					result.add(fromString(string));
 				}
 			}

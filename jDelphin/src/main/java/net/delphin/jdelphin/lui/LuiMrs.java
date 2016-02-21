@@ -26,8 +26,18 @@ import net.delphin.jdelphin.mrs.components.Variable;
  */
 public class LuiMrs extends AbstractMRS {
 
-	public LuiMrs(Handle top, Variable index, Set<ElementaryPredication> relations, Set<HandleConstraint> hcons, Set<IndividualConstraint> icons, String surface) {
-		super(top, index, relations, hcons, icons, surface);
+	public LuiMrs(Handle top, Variable index, Variable xarg, Set<ElementaryPredication> relations, Set<HandleConstraint> hcons, Set<IndividualConstraint> icons) {
+		super(top, index, xarg, relations, hcons, icons, Optional.empty());
+	}
+
+
+	public LuiMrs(Handle top, Variable index, Variable xarg, Set<ElementaryPredication> relations, Set<HandleConstraint> hcons, Set<IndividualConstraint> icons, String surface) {
+		super(top, index, xarg, relations, hcons, icons, Optional.of(surface));
+	}
+
+
+	public LuiMrs(Handle top, Variable index, Variable xarg, Set<ElementaryPredication> relations, Set<HandleConstraint> hcons, Set<IndividualConstraint> icons, Optional<String> surface) {
+		super(top, index, xarg, relations, hcons, icons, surface);
 	}
 
 
@@ -71,55 +81,6 @@ public class LuiMrs extends AbstractMRS {
 		}
 		System.out.println("LuiMrs#fromString() received: " + string);
 		return null; // TODO: THIS
-	}
-
-
-	@Override
-	public Handle getTop() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Variable getIndex() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Variable getXARG() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Set<ElementaryPredication> getRelations() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Set<HandleConstraint> getHCONS() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Set<IndividualConstraint> getICONS() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Optional<String> getSurfaceRepresentation() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
