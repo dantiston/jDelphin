@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Configuration>
+
+  <Properties>
+    <Property name="applicationName">jDelphin</Property>
+    <Property name="pattern">%d{MM-dd-yyyy HH:mm:ss.SSS} %-5level %t:%L - %m%n</Property>
+    <Property name="logDirectory">~/Code/logdir/${applicationName}/</Property>
+  </Properties>
+  
+  <Appenders>
+	<Console name="stdout" target="SYSTEM_OUT">
+	  <PatternLayout pattern="${pattern}"/>
+	</Console>
+	  
+	  
+	<Console name="stderr" target="SYSTEM_ERR">
+	  <PatternLayout pattern="${pattern}"/>
+	</Console>
+	  
+	  
+	<File name="rollingLogger" fileName="${logDirectory}${applicationName}.log"> 
+	  <PatternLayout pattern="${pattern}"/>
+	</File>
+  </Appenders>
+
+  <Loggers>
+    <Root level="info" />
+    
+    <Logger name="net.delphin.jdelphin" level="debug">
+      <AppenderRef ref="stdout"/>
+    </Logger>
+    
+  </Loggers>
+  
+</Configuration>
